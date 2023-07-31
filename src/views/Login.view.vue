@@ -5,8 +5,7 @@ const email = ref("");
 const password = ref("");
 
 const isComplete = computed(() => {
-  return (!(email.value && password.value));
-
+  return !(email.value && password.value);
 });
 </script>
 
@@ -22,7 +21,6 @@ const isComplete = computed(() => {
       </div>
     </form>
   </div>
-
 </template>
 
 <style scoped lang="scss">
@@ -71,7 +69,7 @@ form {
       }
 
       &:hover {
-        background-color: #26a918
+        background-color: #26a918;
       }
     }
   }

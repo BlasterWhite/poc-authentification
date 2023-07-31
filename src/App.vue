@@ -14,6 +14,8 @@ import NavBar from "./components/NavBar.vue";
 </template>
 
 <style lang="scss" scoped>
+@import "@assets/variables.scss";
+
 .slide-fade-enter-active {
   transition: all 0.3s cubic-bezier(0.5, 0, 0.25, 1);
 }

@@ -25,7 +25,7 @@ const isAuth = ref(false);
 
 <style lang="scss" scoped>
 .navbar {
-  background-color: #FF000000;
+  background-color: #ff000000;
   width: 100%;
   color: #282828;
   display: flex;
@@ -49,11 +49,10 @@ const isAuth = ref(false);
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-
   }
 
-  .profile, .auth {
+  .profile,
+  .auth {
     a {
       margin: 0 10px;
     }
@@ -65,7 +64,7 @@ const isAuth = ref(false);
     font-size: 1.4rem;
     margin: 0 20px;
     font-weight: 600;
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
 
     &:hover {
       color: rgb(241, 61, 130);
