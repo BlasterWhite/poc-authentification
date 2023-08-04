@@ -40,9 +40,12 @@ const isAuth = ref(false);
   }
 
   h1 {
-    line-height: 12px;
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.8rem;
     padding: 6px 18px;
     color: rgb(61, 241, 226);
+    user-select: none;
   }
 
   .link {

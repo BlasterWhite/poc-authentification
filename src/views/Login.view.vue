@@ -3,75 +3,74 @@ import { ref, computed } from "vue";
 
 const email = ref("");
 const password = ref("");
+const isPwd = ref(true);
 
 const isComplete = computed(() => {
   return !(email.value && password.value);
 });
+
+function isEmailValid(email: string) {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
+function onsubmit() {
+  console.log("submit");
+}
 </script>
 
 <template>
   <div class="login">
-    <h1>Login</h1>
-    <form>
-      <input type="text" placeholder="Email" v-model="email" />
-      <input type="password" placeholder="Password" v-model="password" />
-      <div class="btn-container">
-        <button type="submit" :disabled="isComplete">Login</button>
-        <a href="#">Forgot your password?</a>
-      </div>
-    </form>
+    <h3>Login</h3>
+    <q-form @submit="onsubmit">
+      <q-input
+        v-model="email"
+        label="Email"
+        type="email"
+        color="primary"
+        lazy-rules
+        :rules="[
+          (val: string) =>
+            (!!val && isEmailValid(val)) || 'Valid email is required',
+        ]"
+      />
+      <q-input
+        v-model="password"
+        label="Password"
+        :type="isPwd ? 'password' : 'text'"
+        :rules="[(val: string) => !!val || 'Password is required']"
+      >
+        <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd"
+          />
+        </template>
+      </q-input>
+
+      <q-btn
+        type="submit"
+        label="Login"
+        :disable="isComplete"
+        color="primary"
+      />
+      <q-btn
+        flat
+        label="I don't have an account"
+        size="sm"
+        color="primary"
+        @click="$router.push('/register')"
+      />
+    </q-form>
   </div>
 </template>
 
 <style scoped lang="scss">
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 10px;
-
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-
-  .btn-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-
-    button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #4af633;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
-
-      &:disabled {
-        background-color: #aaa;
-        cursor: not-allowed;
-
-        &:hover {
-          background-color: #aaa;
-        }
-      }
-
-      &:hover {
-        background-color: #26a918;
-      }
-    }
-  }
+.login {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 </style>
